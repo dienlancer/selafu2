@@ -52,10 +52,6 @@ header.sticky .header_top{
 
 
 
-        header.fixed_hiding .q_logo a,
-        header.fixed_hiding .q_logo{
-            max-height: 58px;
-        }
 
 
 
@@ -238,7 +234,11 @@ footer #lang_sel_list.lang_sel_list_vertical a,
 }
 
  
- 
+ 	.vertical_menu_hidden_button_line,
+	.vertical_menu_hidden_button_line:after,.vertical_menu_hidden_button_line:before{
+		background-color: #ffffff;
+	}
+
  
 
 
@@ -249,9 +249,14 @@ footer #lang_sel_list.lang_sel_list_vertical a,
 	}
 	
 
+	nav.vertical_menu > ul > li > a{
+	 color: #ffffff; 								}
 
 
 
+	.vertical_menu .second .inner > ul > li > a,
+	.vertical_menu .wide .second .inner > ul > li > a{
+	 color: #ffffff; 								}
 
 
 

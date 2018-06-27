@@ -14,8 +14,7 @@ Template: bridge
 /* end font */
 /* begin standard */
 body{
-	font-family: 'sf-ui-display-light';
-	background: url('images/bg.svg') repeat;
+	font-family: 'sf-ui-display-light';	
 }
 a:hover,a:focus{
     text-decoration: none;
@@ -118,31 +117,7 @@ figure:hover img{-webkit-transform:scale3d(1.2, 1.2, 1);transform:scale3d(1.2, 1
 }
 /* end note */
 /* begin header menu */
-.header_top .phone , .sfas a{
-	color: #ffffff;
-}
-.header_bottom{
-	background: #ffffffb3;
-}
-nav.main_menu>ul>li>a{
-	padding : 0 10px;
-  color: #ffffff;
-}
-nav.main_menu>ul>li.active>a{
-	color: #FDFAC7
-}
-.drop_down .second .inner>ul, li.narrow .second .inner ul{
-	background: #ffffff;	   	
-}
-.drop_down .second .inner ul li a:hover{
-	background:#DD0022;
-}
-li.narrow .second .inner ul{
-	padding: 0;
-}
-.drop_down .second .inner ul li a, .drop_down .second .inner ul li h5{
-	color: #333;
-}
+
 /* end header menu */
 /* begin quick alo phone */
 .quick-alo-phone.quick-alo-static {
@@ -559,7 +534,12 @@ li.narrow .second .inner ul{
     top: 30px;
 }
 /* end quick alo phone*/
-
+aside.vertical_menu_area{
+  background-color: #0D612C;
+}
+nav.vertical_menu ul li ul li a{
+  padding:5px 15px;
+}
 @media (max-width: 768px) { 
 
 }
