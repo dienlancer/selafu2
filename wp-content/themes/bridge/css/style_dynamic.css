@@ -3,14 +3,6 @@
 
 
 
-    .transparent_content,
-	.transparent_content.overlapping_content .content .content_inner > .container,
-	.transparent_content.overlapping_content .content .content_inner > .full_width > .full_width_inner{
-		
-		
-		
-		}
-
 
 
 .header_bottom,
@@ -256,10 +248,13 @@ footer #lang_sel_list.lang_sel_list_vertical a,
 
 	.vertical_menu .second .inner > ul > li > a,
 	.vertical_menu .wide .second .inner > ul > li > a{
-	 color: #ffffff; 								}
+	 color: #ffffff; 		 font-size: 13px; 					text-transform: uppercase; 	}
 
 
 
+	.vertical_menu .second .inner > ul > li > a:hover{
+	color: #ffffff !important;
+	}
 
 
 

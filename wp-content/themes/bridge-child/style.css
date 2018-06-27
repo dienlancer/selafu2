@@ -11,6 +11,7 @@ Template: bridge
 /* begin font */
 @font-face{font-family:"sf-ui-display-light";src:url("fonts/sf-ui-display-light-58646b33e0551.woff") format('truetype');}
 @font-face{font-family:"bebas-neue";src:url("fonts/BebasNeue-Regular.ttf") format('truetype');}
+@font-face{font-family:"Lobster";src:url("fonts/Lobster-Regular.ttf") format('truetype');}
 /* end font */
 /* begin standard */
 body{
@@ -537,11 +538,51 @@ figure:hover img{-webkit-transform:scale3d(1.2, 1.2, 1);transform:scale3d(1.2, 1
 aside.vertical_menu_area{
   background-color: #0D612C;
 }
-nav.vertical_menu ul li ul li a{
-  padding:5px 15px;
+
+.vertical_menu ul li a{
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+.vertical_menu ul li ul li a{
+  padding-left: 30px  !important;
+  padding-right: 30px !important; 
+padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.vertical_menu ul li a:hover{
+  background: #df963a;
+
+}
+.vertical_logo_wrapper{
+  display: none;
+}
+.hotline1{      
+    font-size: 25px;
+    color: #0D612C;
+    font-family:"bebas-neue";
+    margin-top: 10px;
+}
+.hotline2{
+      font-family: 'Lobster', cursive;
+    font-size: 20px;
+    color: #0D612C;
+    margin-top: 10px;
+}
+.hotline3{
+      font-family: 'Lobster', cursive;
+    font-size: 13px;
+    color: #0D612C;
+    margin-top: 15px;    
+}
+.box-logo{
+  margin-top: 15px
 }
 @media (max-width: 768px) { 
-
+  .hotline1,.hotline2,.hotline3{
+    text-align: center;
+  }
 }
 @media (max-width: 576px){
 

@@ -118,3 +118,88 @@ s0.parentNode.insertBefore(s1,s0);
 }
 /* end fanpage */
 
+/* begin header-top */
+add_shortcode('header_top','showHeaderTop');
+function showHeaderTop(){
+	global $zendvn_sp_settings;		
+	?>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10">
+				<div class="box-logo">
+					<center><a href="<?php echo site_url(); ?>"><img width="200" src="<?php echo site_url('wp-content/uploads/logo.png'); ?>"></a></center>
+				</div>				
+			</div>
+			<div class="col-lg-2">
+				<div class="hotline3">Selafu sẵn sàng phục vụ quý khách</div>
+				<div class="hotline1">HOTLINE</div>
+				<div class="hotline2"><?php echo @$zendvn_sp_settings['telephone']; ?></div>
+			</div>
+		</div>
+	</div>	
+	<?php
+}
+/* end header-top */
+/* begin banner */
+add_shortcode('banner','loadBanner');
+function loadBanner($attrs){
+	$item=$attrs['item'];	
+	?>
+	<div class="margin-top-15">
+        <script type="text/javascript" language="javascript">
+            jQuery(document).ready(function(){
+                jQuery(".banner").owlCarousel({
+                    autoplay:true,                    
+                    loop:true,
+                    margin:0,                        
+                    nav:false,            
+                    mouseDrag: true,
+                    touchDrag: true,                                
+                    responsiveClass:true,
+                    responsive:{
+                        0:{
+                            items:1
+                        },
+                        600:{
+                            items:1
+                        },
+                        1000:{
+                            items:1
+                        }
+                    }
+                });
+
+            });                
+        </script>
+        <div class="owl-carousel banner owl-theme">
+            <?php                                 
+            $source_slug=array($item);
+            $args = array(
+                'post_type' => 'zabanner',  
+                'orderby' => 'id',
+                'order'   => 'DESC',                                                  
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'za_banner',
+                        'field'    => 'slug',
+                        'terms'    => $source_slug,                                  
+                    ),
+                ),
+            ); 
+            $the_query = new WP_Query( $args );
+            if($the_query->have_posts()){
+                while ($the_query->have_posts()){
+                    $the_query->the_post();
+                    $post_id=$the_query->post->ID;  
+                    $featured_img=get_the_post_thumbnail_url($post_id, 'full'); 
+                    ?>
+                    <div><img src="<?php echo $featured_img; ?>"></div>
+                    <?php
+                }
+            }
+            ?>
+        </div>
+    </div>
+	<?php
+}
+/* end banner */
