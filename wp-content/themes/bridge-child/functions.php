@@ -308,6 +308,7 @@ function showMeal(){
 			<?php 
 			foreach ($terms as $key => $value) {				
 				$source_img = get_field('featured_img', $value);
+				$term_link= get_term_link($value,'za_meal');		
 				?>
 				<div>
 					<div class="box-meal">
@@ -316,6 +317,16 @@ function showMeal(){
 							<div class="zimin">
 								<div class="box-meal-title"><center><?php echo $value->name; ?></center></div>
 								<div class="box-meal-description"><?php echo $value->description; ?></div>
+								<div class="box-read-more">
+									<div class="xem-them">
+										<a href="<?php echo $term_link; ?>" >
+											<div class="narit">
+												<div >Xem thêm</div>
+												<div class="margin-left-5"><i class="fas fa-arrow-circle-right"></i></div>											
+											</div>								
+										</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>					

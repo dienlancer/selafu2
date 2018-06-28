@@ -17,6 +17,10 @@ class RewriteHelper{
 
 		add_rewrite_tag('%za_category%', '([^/]+)');
 		add_permastruct('za_category', 'loai-san-pham/%za_category%.html');		
+
+		add_rewrite_tag('%za_meal%', '([^/]+)');
+		add_permastruct('za_meal', 'bua-ngon/%za_meal%.html');		
+
 		flush_rewrite_rules(false);
 	}
 	
