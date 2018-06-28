@@ -381,7 +381,7 @@ function showNews($attrs){
 							jQuery(".news").owlCarousel({
 								autoplay:true,                    
 								loop:true,
-								margin:10,                        
+								margin:15,                        
 								nav:false,            
 								mouseDrag: true,
 								touchDrag: true,                                
@@ -429,7 +429,7 @@ function showNews($attrs){
 									<div class="box-news-intro margin-top-5">
 										<?php echo $intro; ?>
 									</div>
-									<div class="product-readmore">
+									<div class="product-readmore padding-bottom-15 padding-left-15 padding-right-15">
 										<div class="xem-them">
 											<a href="<?php echo $term_link; ?>" >
 												<div class="narit">

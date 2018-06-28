@@ -96,10 +96,10 @@ header.sticky .header_top{
 
 
 	.footer_top_holder,	footer #lang_sel > ul > li > a,	footer #lang_sel_click > ul > li > a{
-		background-color: #1d1d1d;
+		background-color: #0d612c;
 	}
 	footer #lang_sel ul ul a,footer #lang_sel_click ul ul a,footer #lang_sel ul ul a:visited,footer #lang_sel_click ul ul a:visited{
-		background-color: #1d1d1d !important;
+		background-color: #0d612c !important;
 	}
 
 
@@ -116,12 +116,12 @@ header.sticky .header_top{
     .footer_top li,
     .footer_top .textwidget,
     .footer_top .widget_recent_entries>ul>li>span {
-		color: #d5d5d5;
+		color: #ffffff;
 	}
 
 
 	.footer_bottom_holder, #lang_sel_footer{
-		background-color:#353535;
+		background-color:#27a800;
 	}
 
 
@@ -148,7 +148,7 @@ footer #lang_sel_list.lang_sel_list_horizontal a,
 footer #lang_sel_list.lang_sel_list_vertical a,
 #lang_sel_footer a,
 .footer_bottom ul li a {
-	color:#d5d5d5;
+	color:#ffffff;
 }
 
 
