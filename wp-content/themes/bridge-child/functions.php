@@ -273,7 +273,7 @@ function loadProduct($attrs){
 					?>
 					<div>
 						<div>
-							<center><a href="<?php echo @$permalink; ?>"><img src="<?php echo @$thumbnail; ?>" alt="<?php echo @$title; ?>"></a></center>
+							<center><figure><a href="<?php echo @$permalink; ?>"><img src="<?php echo @$thumbnail; ?>" alt="<?php echo @$title; ?>"></a></figure></center>
 
 						</div>						 
 						<div class="box-product-title margin-top-5">
@@ -295,7 +295,7 @@ function loadProduct($attrs){
 	}
 }
 /* end san pham */
-/* begin bữa ngon */
+/* begin bua-ngon */
 add_shortcode( 'bua_ngon', 'showMeal' );
 function showMeal(){
 	$terms = get_terms( array(
@@ -338,7 +338,7 @@ function showMeal(){
 		<?php		
 	}	
 }
-/* end bữa ngon */
+/* end bua-ngon */
 /* begin google map */
 add_shortcode( 'ggmap', 'showGoogleMap' );
 function showGoogleMap(){
@@ -346,8 +346,110 @@ function showGoogleMap(){
 	$vHtml=new HtmlControl();
 	?>
 	<div class="map" >
-		<iframe src="<?php echo @$zendvn_sp_settings['ban_do']; ?>" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+		<iframe src="<?php echo @$zendvn_sp_settings['ban_do']; ?>" width="100%" height="362" frameborder="0" style="border:0" allowfullscreen></iframe>
 	</div>
 	<?php
 }
 /* end google map */
+/* begin tin tuc */
+add_shortcode( 'news', 'showNews' );
+function showNews($attrs){
+	global $zController,$zendvn_sp_settings;    
+	$vHtml=new HtmlControl();
+	$source_slug=explode(',', $attrs['item']);
+	$args = array(
+		'post_type' => 'post',  
+		'orderby' => 'id',
+		'order'   => 'DESC',   
+		'posts_per_page'=>8,                                               
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'category',
+				'field'    => 'slug',
+				'terms'    => $source_slug,                                  
+			),
+		),
+	); 
+	$the_query=new WP_Query($args);				
+	if($the_query->have_posts()){
+		?>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<script type="text/javascript" language="javascript">
+						jQuery(document).ready(function(){
+							jQuery(".news").owlCarousel({
+								autoplay:true,                    
+								loop:true,
+								margin:10,                        
+								nav:false,            
+								mouseDrag: true,
+								touchDrag: true,                                
+								responsiveClass:true,
+								responsive:{
+									0:{
+										items:1
+									},
+									600:{
+										items:4
+									},
+									1000:{
+										items:4
+									}
+								}
+							});
+							var chevron_left='<i class="fa fa-chevron-left"></i>';
+							var chevron_right='<i class="fa fa-chevron-right"></i>';
+							jQuery("div.news div.owl-prev").html(chevron_left);
+							jQuery("div.news div.owl-next").html(chevron_right);
+						});                
+					</script>
+					<div class="owl-carousel news owl-theme">
+						<?php 
+						while ($the_query->have_posts()){
+							$the_query->the_post();
+							$post_id=$the_query->post->ID;																		
+							$permalink=get_the_permalink($post_id);
+							$title=get_the_title($post_id);
+							$thumbnail=get_the_post_thumbnail_url($post_id, 'thumbnail');							
+							$intro=get_post_meta($post_id,"intro",true);	
+							$intro=mb_substr($intro, 0,100).'...';				
+							?>
+							<div>
+								<div class="box-news">
+									<div>
+										<figure><center><a href="<?php echo @$permalink; ?>"><img src="<?php echo @$thumbnail; ?>" alt="<?php echo @$title; ?>"></a></center></figure>
+
+									</div>						 
+									<div class="box-news-title margin-top-5">
+										
+										<a href="<?php echo @$permalink; ?>" title="<?php echo @$title; ?>" ><b><?php echo @$title; ?></b></a>	
+										
+									</div>
+									<div class="box-news-intro margin-top-5">
+										<?php echo $intro; ?>
+									</div>
+									<div class="product-readmore">
+										<div class="xem-them">
+											<a href="<?php echo $term_link; ?>" >
+												<div class="narit">
+													<div >Xem thêm</div>
+													<div class="margin-left-5"><i class="fas fa-arrow-circle-right"></i></div>											
+												</div>								
+											</a>
+										</div>
+									</div>
+								</div>								
+							</div>
+							<?php
+						}
+						wp_reset_postdata();  
+						?>	
+					</div>	
+				</div>
+			</div>			
+		</div>
+		<?php
+	}
+}
+/* end tin tuc */

@@ -623,6 +623,19 @@ padding-top: 10px !important;
     color: #0D612C;
     
 }
+.box-news-title a{
+	  font-family: 'Lobster', cursive;
+    font-size: 15px;
+    color: #0D612C;
+
+}
+.box-news-title,.box-news-intro{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.box-news-intro{
+	padding-bottom: 15px;
+}
 .box-real{
 	display: flex;
     align-items: center;
@@ -669,6 +682,10 @@ padding-top: 10px !important;
 	width: 100%;
 	border: 2px solid #0D612C;
 	padding: 10px;
+}
+.box-news{
+	background: #ffffff;
+
 }
 @media (max-width: 768px) { 
   .hotline1,.hotline2,.hotline3{
