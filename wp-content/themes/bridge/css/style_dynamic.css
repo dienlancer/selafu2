@@ -44,6 +44,10 @@ header.sticky .header_top{
 
 
 
+        header.fixed_hiding .q_logo a,
+        header.fixed_hiding .q_logo{
+            max-height: 124px;
+        }
 
 
 
