@@ -31,6 +31,12 @@ function wp_schools_enqueue_scripts() {
 	wp_register_style( 'modal_video_css', get_stylesheet_directory_uri() . '/youtube/modal-video.min.css' ,array(),false,'all'  );
 	wp_enqueue_style( 'modal_video_css' );
 	/* end youtube */
+	/* begin fancybox */
+	wp_register_script('fancybox_js',get_stylesheet_directory_uri() . '/fancybox/jquery.fancybox.min.js',array(),false,false);
+	wp_enqueue_script('fancybox_js');
+	wp_register_style( 'fancybox_css', get_stylesheet_directory_uri() . '/fancybox/jquery.fancybox.min.css' ,array(),false,'all'  );
+	wp_enqueue_style( 'fancybox_css' );
+	/* end fancybox */
 	/* begin tab */
 	wp_register_style( 'tab_css', get_stylesheet_directory_uri() . '/css/tab.css' ,array(),false,'all'  );
 	wp_enqueue_style( 'tab_css' );
@@ -196,6 +202,7 @@ function loadBanner($attrs){
                     <div><img src="<?php echo $featured_img; ?>"></div>
                     <?php
                 }
+                wp_reset_postdata();  
             }
             ?>
         </div>
@@ -203,3 +210,121 @@ function loadBanner($attrs){
 	<?php
 }
 /* end banner */
+/* begin san pham */
+add_shortcode('product','loadProduct');
+function loadProduct($attrs){
+	global $zController,$zendvn_sp_settings;    
+	$vHtml=new HtmlControl();
+	$source_slug=explode(',', $attrs['item']);
+	$args = array(
+		'post_type' => 'zaproduct',  
+		'orderby' => 'id',
+		'order'   => 'DESC',                                                  
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'za_category',
+				'field'    => 'slug',
+				'terms'    => $source_slug,                                  
+			),
+		),
+	); 
+	$the_query=new WP_Query($args);				
+	if($the_query->have_posts()){
+		?>
+		<div>
+			<script type="text/javascript" language="javascript">
+				jQuery(document).ready(function(){
+					jQuery(".product").owlCarousel({
+						autoplay:true,                    
+						loop:true,
+						margin:10,                        
+						nav:false,            
+						mouseDrag: true,
+						touchDrag: true,                                
+						responsiveClass:true,
+						responsive:{
+							0:{
+								items:1
+							},
+							600:{
+								items:3
+							},
+							1000:{
+								items:3
+							}
+						}
+					});
+					var chevron_left='<i class="fa fa-chevron-left"></i>';
+					var chevron_right='<i class="fa fa-chevron-right"></i>';
+					jQuery("div.product div.owl-prev").html(chevron_left);
+					jQuery("div.product div.owl-next").html(chevron_right);
+				});                
+			</script>
+			<div class="owl-carousel product owl-theme">
+				<?php 
+				while ($the_query->have_posts()){
+					$the_query->the_post();
+					$post_id=$the_query->post->ID;																		
+					$permalink=get_the_permalink($post_id);
+					$title=get_the_title($post_id);
+					$featured_img=get_the_post_thumbnail_url($post_id, 'full');	
+					$thumbnail=$vHtml->getSmallImage($featured_img);					
+					$intro=get_post_meta($post_id,"intro",true);					
+					?>
+					<div>
+						<div>
+							<center><a href="<?php echo @$permalink; ?>"><img src="<?php echo @$thumbnail; ?>" alt="<?php echo @$title; ?>"></a></center>
+
+						</div>						 
+						<div class="box-product-title margin-top-5">
+							<center>
+								<a href="<?php echo @$permalink; ?>" title="<?php echo @$title; ?>" ><b><?php echo @$title; ?></b></a>	
+							</center>
+						</div>
+						<div class="box-product-intro margin-top-5">
+							<center><?php echo $intro; ?></center>
+						</div>
+					</div>
+					<?php
+				}
+				wp_reset_postdata();  
+				?>	
+			</div>
+		</div>
+		<?php
+	}
+}
+/* end san pham */
+/* begin bữa ngon */
+add_shortcode( 'bua_ngon', 'showMeal' );
+function showMeal(){
+	$terms = get_terms( array(
+		'taxonomy' => 'za_meal',
+		'hide_empty' => false, 
+		'parent' => 0 ) );			
+	if(count($terms) > 0){		
+		?>
+		<div class="box-real">
+			<?php 
+			foreach ($terms as $key => $value) {				
+				$source_img = get_field('featured_img', $value);
+				?>
+				<div>
+					<div class="box-meal">
+						<figure><img src="<?php echo $source_img['url']; ?>"></figure>
+						<div class="box-meal-intro">
+							<div class="zimin">
+								<div class="box-meal-title"><center><?php echo $value->name; ?></center></div>
+								<div class="box-meal-description"><?php echo $value->description; ?></div>
+							</div>
+						</div>
+					</div>					
+				</div>
+				<?php
+			}	
+			?>	
+		</div>
+		<?php		
+	}	
+}
+/* end bữa ngon */
