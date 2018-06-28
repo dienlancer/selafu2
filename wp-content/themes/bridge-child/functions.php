@@ -339,3 +339,15 @@ function showMeal(){
 	}	
 }
 /* end bữa ngon */
+/* begin google map */
+add_shortcode( 'ggmap', 'showGoogleMap' );
+function showGoogleMap(){
+	global $zController,$zendvn_sp_settings;    
+	$vHtml=new HtmlControl();
+	?>
+	<div class="map" >
+		<iframe src="<?php echo @$zendvn_sp_settings['ban_do']; ?>" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+	</div>
+	<?php
+}
+/* end google map */
